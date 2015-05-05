@@ -1,0 +1,96 @@
+﻿Oxford Dictionary HashTable Program
+Trevor Stephens; github userID: codewalker
+
+Public Method Documentation	
+
+
+
+	
+DictionaryHash(int x);  //Constructor
+
+				PreCondition: x will be used to create the size of the HashTable array
+						x should be at least the number of elements to be store i.e. Load Factor = 1
+				PostCondition: initializes HashTable Array of the class object and sets all elements to a null pointer
+						A private variable is also set to the size of the hashtable.
+        
+virtual ~DictionaryHash();	//Destructor
+				
+				PreCondition: a class object for destruction
+				
+				Post Condition: destroyed class object
+
+
+int hashTableSize(std::string);		//Function that counts lines in file(Oxford Dictionary .txt) that contain a word, returned integer used to create size of Hash Table upon call to constructor 
+
+				PreCondition:string parameter must be the name of a file to be read in. The program is optimized and tailored for the OxfordDictionary.txt file. 
+						Customization of many parts of the program would be necessary to use a different .txt file of a different format
+
+				Post Condition:	Returns the amount of lines in the file where a line string is longer than 10 characters, in int type
+
+        
+
+void readInDictionary(std::string);	//Function reads the Dictionary file and stores each relevant line into a dictionaryWord struct that is then inserted into the objects Hash Table 
+
+				PreCondition:  parameter string must be a .txt file name. Program is optimized/tailored for the Oxford Dictionary txt file so that is the only recommended parameter
+
+				Post Condition:	The class object will have a hashTable that stores all of the words contained in the file
+
+        
+
+dictionaryWord* RandomWordGenerator();	//Function finds a random word of any type in the hash table
+
+				PreCondition:	function can only be successfully called after the creation of a hashTable and words being successfully in the table. No other parameters
+
+				Post Condition:	function returns a pointer to a random dictionaryWord struct that was contained in the hash table
+
+
+        
+int randomNumber(int rangeMax);		//Function generates a random number in a specified
+
+				PreCondition:	The one parameter is of int type that representsthe upper limit of the range that the a returned random number can be. function is not dependent 
+						on any other functions being called prior.
+
+				Post Condition:	function returns a random number between 0 and the specified upper limit
+
+        
+
+dictionaryWord* findWord(std::string wordToFind);		//function attempts to find a specified word within the hash table
+
+				PreCondition:	the string must be a word that could be contained in the dictionary. the string must have its first letter capitalized
+
+				Post Condition:  The function returns either the pointer to the dictionaryWord struct representing the searched for word OR
+							if the word was not found, returns a null pointer
+      
+
+void addToFavorites(dictionaryWord* wordFavorite);		//function saves a word to a user's favorites vector
+
+				PreCondition:	parameter is a pointer to a dictionaryWord struct. Although any struct of the same type can be a parameter, the function is intended to take a 
+						the struct representation of a specific word after the user explicitly designates a word to be saved to favorites via the programs main menu during execution
+
+				Post Condition:  the struct of aforementioned type is saved to a private vector, favoriteWords[], within class object.
+
+      
+
+dictionaryWord* getRandomType(std::string wordType);	//Function retrieves a random word that is either a noun, a verb, or a adjective
+
+				PreCondition:	string wordType must be either: "noun", "adj", "verb"; only strings that match one of these three will see the function work correctly. 
+							Hash Table must be assembled with dictionary words read in and the three word type vectors must contain the appropriate structs. 
+							All of the above data storage devices are will be successfully created with data read in upon calling readInDictionary(string). 
+
+				Post Condition:     function returns a random pointer to dictionaryWord struct of one of the three word types depending on which of the three was used as 
+							a parameter upon call to the function    
+
+void displayFavorites();	//Function prints the contents of the private class vector, favoriteWords[]
+
+				PreCondition:	for the function call to display anything, at least one word must have been added to favoriteWords[]. 
+
+
+				Post Condition:     prints the word and associated definition of all dictionaryWord structs contained within favoriteWords vector (again, a private class variable)   
+
+
+std::string createAdlib(std::string baseSentence);	//Function takes a string, finds specified key words and replaces them with random words of specified type
+
+				PreCondition:	the string parameter must contain key words to be replaced. The three effective key words, verbatim, are:  *noun *verb *adje
+						not having keywords will return the string taken as a parameter
+
+				Post Condition: function returns a string with all specified key words replaced with random words of type indicative of one of the three key words. aka an adlibbed version of the parameter string
